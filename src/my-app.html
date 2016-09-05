@@ -20,13 +20,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-header-panel/paper-header-panel.html">
 <link rel="import" href="my-icons.html">
 
 <dom-module id="my-app">
   <template>
     <style>
       :host {
-        --app-primary-color: #4285f4;
+        --app-primary-color: #5d8c74;
         --app-secondary-color: black;
 
         display: block;
@@ -45,7 +46,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       .drawer-list a {
-        display: block;
+        display: inline-block;
 
         padding: 0 16px;
 
@@ -70,37 +71,63 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         data="{{routeData}}"
         tail="{{subroute}}"></app-route>
 
-    <app-drawer-layout fullbleed>
-      <!-- Drawer content -->
-      <app-drawer>
-        <app-toolbar>Menu</app-toolbar>
-        <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
+    <app-header role="navigation" id="header" effects="waterfall" condenses reveals>
+        <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigeation">
           <a name="about-view" href="/about-view">About</a>
           <a name="calendar-view" href="/calendar-view">Calendar</a>
         </iron-selector>
-      </app-drawer>
+    </app-header>
 
-      <!-- Main content -->
-      <app-header-layout has-scrolling-region>
 
-        <app-header condenses reveals effects="waterfall">
-          <app-toolbar>
-            <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
-            <div main-title>Callahan Road</div>
-          </app-toolbar>
-        </app-header>
+    <!--<paper-header-panel class="flex">-->
+      <!--<iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigeation">-->
+        <!--<a name="about-view" href="/about-view">About</a>-->
+        <!--<a name="calendar-view" href="/calendar-view">Calendar</a>-->
+      <!--</iron-selector>-->
+    <!--</paper-header-panel>-->
 
-        <iron-pages
-            selected="[[page]]"
-            attr-for-selected="name"
-            fallback-selection="view404"
-            role="main">
-          <my-about-view name="about-view"></my-about-view>
-          <my-view404 name="view404"></my-view404>
-          <my-calendar-view name="calendar-view"></my-calendar-view>
-        </iron-pages>
-      </app-header-layout>
-    </app-drawer-layout>
+    <!--<app-drawer-layout fullbleed>-->
+      <!--&lt;!&ndash; Drawer content &ndash;&gt;-->
+      <!--<app-drawer>-->
+        <!--<app-toolbar>Menu</app-toolbar>-->
+        <!--<iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigeation">-->
+          <!--<a name="about-view" href="/about-view">About</a>-->
+          <!--<a name="calendar-view" href="/calendar-view">Calendar</a>-->
+        <!--</iron-selector>-->
+      <!--</app-drawer>-->
+
+      <!--&lt;!&ndash; Main content &ndash;&gt;-->
+      <!--<app-header-layout has-scrolling-region>-->
+
+        <!--<app-header condenses reveals effects="waterfall">-->
+          <!--<app-toolbar>-->
+            <!--<paper-icon-button icon="menu" drawer-toggle></paper-icon-button>-->
+            <!--<div main-title>Callahan Road</div>-->
+          <!--</app-toolbar>-->
+        <!--</app-header>-->
+
+        <!--<iron-pages-->
+            <!--selected="[[page]]"-->
+            <!--attr-for-selected="name"-->
+            <!--fallback-selection="view404"-->
+            <!--role="main">-->
+          <!--<my-about-view name="about-view"></my-about-view>-->
+          <!--<my-view404 name="view404"></my-view404>-->
+          <!--<my-calendar-view name="calendar-view"></my-calendar-view>-->
+        <!--</iron-pages>-->
+      <!--</app-header-layout>-->
+    <!--</app-drawer-layout>-->
+
+    <iron-pages
+        selected="[[page]]"
+        attr-for-selected="name"
+        fallback-selection="view404"
+        role="main">
+      <my-about-view name="about-view"></my-about-view>
+      <my-view404 name="view404"></my-view404>
+      <my-calendar-view name="calendar-view"></my-calendar-view>
+    </iron-pages>
+    </app-header-layout>
   </template>
 
   <script>
@@ -108,10 +135,28 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       is: 'my-app',
 
       properties: {
+
         page: {
           type: String,
           reflectToAttribute: true,
           observer: '_pageChanged'
+        },
+
+        numItems: {
+          type: Number,
+          value: 0
+        },
+
+        _shouldShowTabs: {
+          computed: '_computeShouldShowTabs(page, smallScreen)'
+        },
+
+        _shouldRenderTabs: {
+          computed: '_computeShouldRenderTabs(_shouldShowTabs, loadComplete)'
+        },
+
+        _shouldRenderDrawer: {
+          computed: '_computeShouldRenderDrawer(smallScreen, loadComplete)'
         }
       },
 
@@ -131,7 +176,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _showPage404: function() {
         this.page = 'view404';
-      }
+      },
+
+      _computeShouldShowTabs: function(page, smallScreen) {
+        return (page === 'home' || page === 'list' || page === 'detail') && !smallScreen;
+      },
+
+      _computeShouldRenderTabs: function(_shouldShowTabs, loadComplete) {
+        return _shouldShowTabs && loadComplete;
+      },
+
+      _computeShouldRenderDrawer: function(smallScreen, loadComplete) {
+        return smallScreen && loadComplete;
+      },
     });
   </script>
 </dom-module>

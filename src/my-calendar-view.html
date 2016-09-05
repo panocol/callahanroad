@@ -1,24 +1,30 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/paper-slider/paper-slider.html">
 <link rel="import" href="../bower_components/iron-icons/image-icons.html">
+<link rel="import" href="shared-styles.html">
 <link rel="import" href="icon-toggle.html">
 
 <dom-module id="my-calendar-view">
   <!-- Defines the element's style and local DOM -->
   <template>
-    <style>
+    <style include="shared-styles">
       :host {
         display: block;
 
-        padding: 16px;
+        padding: 10px;
       }
     </style>
 
-    <h1>Calendar</h1>
-    <paper-slider min="-100" max="100" value="50"></paper-slider>
-    <br>
-    <icon-toggle toggle-icon="nature"></icon-toggle>
-    <icon-toggle toggle-icon="nature" pressed></icon-toggle>
+    <div class="card">
+
+      <h1>Farm Calendar</h1>
+
+      <!-- Embeded google Farm calendar -->
+      <iframe
+          src="https://calendar.google.com/calendar/embed?showTitle=0&amp;showTabs=0&amp;showCalendars=0&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=lm27tvkna966oddcok8riflssc%40group.calendar.google.com&amp;color=%238D6F47&amp;ctz=America%2FNew_York"
+          style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+    </div>
+
   </template>
   <!-- Creates the element's prototype and registers it -->
   <script>
