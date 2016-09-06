@@ -72,11 +72,28 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         tail="{{subroute}}"></app-route>
 
     <app-header role="navigation" id="header" effects="waterfall" condenses reveals>
-        <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigeation">
+      <paper-material elevation="2">
+        <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
           <a name="about-view" href="/about-view">About</a>
           <a name="calendar-view" href="/calendar-view">Calendar</a>
         </iron-selector>
+      </paper-material>
     </app-header>
+
+    <!--<div class="vertical layout">-->
+      <!--<paper-header-panel class="flex">-->
+        <!--<div class="paper-header">-->
+          <!--Login-->
+        <!--</div>-->
+        <!--<div>-->
+          <!--<paper-input-container>-->
+            <!--<label>Username</label>-->
+            <!--<input is="iron-input" bind-value="{{user}}" type="text">-->
+          <!--</paper-input-container>-->
+        <!--</div>-->
+
+      <!--</paper-header-panel>-->
+    <!--</div>-->
 
 
     <!--<paper-header-panel class="flex">-->
@@ -126,8 +143,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <my-about-view name="about-view"></my-about-view>
       <my-view404 name="view404"></my-view404>
       <my-calendar-view name="calendar-view"></my-calendar-view>
+      <my-login-view name="login-view"></my-login-view>
     </iron-pages>
-    </app-header-layout>
   </template>
 
   <script>
@@ -188,7 +205,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _computeShouldRenderDrawer: function(smallScreen, loadComplete) {
         return smallScreen && loadComplete;
-      },
+      }
     });
   </script>
 </dom-module>

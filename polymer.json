@@ -4,7 +4,8 @@
   "fragments": [
     "src/my-about-view.html",
     "src/my-view404.html",
-    "src/my-calendar-view.html"
+    "src/my-calendar-view.html",
+    "src/my-login-view.html"
   ],
   "sourceGlobs": [
    "src/**/*",

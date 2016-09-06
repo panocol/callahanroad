@@ -1,0 +1,65 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/paper-input/paper-input-container.html">
+<link rel="import" href="../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+
+<link rel="import" href="../bower_components/iron-input/iron-input.html">
+
+
+
+
+
+<dom-module id="my-login-view">
+
+  <style include="iron-flex iron-flex-alignment">
+    .login-container {
+
+    }
+
+  </style>
+
+  <template>
+
+    <div class="layout horizontal center-justified center">
+      <paper-card elevation="2" heading="Login">
+        <div class="card-content">
+          <paper-input-container>
+            <label>Username</label>
+            <input is="iron-input" bind-value="{{user}}" type="text">
+          </paper-input-container>
+          <paper-input-container>
+            <label>Password</label>
+            <input is="iron-input" bind-value="{{password}}" type="password">
+          </paper-input-container>
+        </div>
+        <div class="card-actions">
+          <paper-button>Login</paper-button>
+        </div>
+      </paper-card>
+    </div>
+
+
+  </template>
+
+  <script>
+    Polymer({
+
+      is: "my-login-view",
+
+      properties: {
+
+        user: {
+          type: String
+        },
+        password: {
+          type: String
+        }
+
+      }
+
+    });
+  </script>
+</dom-module>
