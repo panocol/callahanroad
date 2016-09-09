@@ -15,16 +15,44 @@
 <dom-module id="my-login-view">
 
   <style include="iron-flex iron-flex-alignment">
-    .login-container {
+
+    :host {
+      /*--app-primary-color: #5d8c74;*/
+      /*flex: auto;*/
+      /*height: 100%;*/
+    }
+    .container {
+      background-color: var(--app-primary-color);
+      height: 100%;
+      @apply(--layout-horizontal);
+      @apply(--layout-center-justified);
+      @apply(--layout-center);
+
+      /*flex: auto;*/
+      /*height: auto;*/
+
+      /*layout horizontal center-justified center alignment auto*/
+    }
+
+    .vertical_container {
+      height: 100%;
+      @apply(--layout-vertical);
+      @apply(--layout-flex)
 
     }
+
+    /*.child {*/
+      /*flex: auto;*/
+      /*margin: 300px;*/
+    /*}*/
 
   </style>
 
   <template>
 
-    <div class="layout horizontal center-justified center">
-      <paper-card elevation="2" heading="Login">
+    <div class="vertical_container">
+    <div class="container">
+      <paper-card class="child" elevation="2" heading="Login">
         <div class="card-content">
           <paper-input-container>
             <label>Username</label>
@@ -39,6 +67,7 @@
           <paper-button>Login</paper-button>
         </div>
       </paper-card>
+    </div>
     </div>
 
 
